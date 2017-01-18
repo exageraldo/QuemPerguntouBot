@@ -22,8 +22,15 @@ def start(bot, update):
 	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
 
 def lista(bot, update):
-	texto = "Lista de quem perguntou:\n1.\n2.\n3.\n4.\n5.\nTotal: ZERO!"
-	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
+	mensagem = update.message.text
+	mensagem = mensagem.replace("/lista","")
+	if(not(mensagem)):
+		texto = "Lista de quem perguntou:\n1.\n2.\n3.\n4.\n5.\nTotal: ZERO!"
+		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
+	else:
+		mensagem = mensagem.replace(" ","")
+		texto = "Lista de quem perguntou a opinião de " + str(mensagem) + ":\n1.\n2.\n3.\n4.\n5.\nTotal: ZERO!"
+		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
 
 def add(bot, update):
 	mensagem = update.message.text
