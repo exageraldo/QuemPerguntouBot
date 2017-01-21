@@ -35,13 +35,14 @@ def lista(bot, update):
 
 def add(bot, update):
 	mensagem = update.message.text
-	mensagem = mensagem.replace("/add ","")
+	mensagem = mensagem.replace("/add","")
 	frases = ["Sinceramente, ninguem quer saber da sua opinião ", "Acho melhor você ficar calad@ e se recolher na sua insignificância ",
 			"Não adianta inisistir, você nunca será ouvid@ (nem lid@) "]
 	if(not(mensagem)):
 		texto = "De quem você quis adicionar a opinião?!\n<b>Foda-se</b>. Não é importante de qualquer maneira."
 		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
 	else:
+		mensagem = mensagem.replace(" ","")
 		frase = frases[randint(0,len(frases)-1)]
 		texto = str(frase) + str(mensagem) + "."
 		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
