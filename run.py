@@ -14,35 +14,83 @@ dp = updater.dispatcher
 
 
 def start(bot, update):
-	texto = "Olá.\nEsse bot foi desenvolvido para fins que não importam a você."
-	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
+	texto = (
+		"Olá.\n"
+		"Esse bot foi desenvolvido para fins que não importam a você."
+	)
+	bot.sendMessage(
+		chat_id=update.message.chat_id,
+		reply_to_message_id=update.message.message_id,
+		text=texto
+	)
 
 
 def lista(bot, update):
 	mensagem = update.message.text
 	mensagem = mensagem.replace("/lista","")
 	if(not(mensagem)):
-		texto = "Lista de quem perguntou:\n1.\n2.\n3.\n4.\n5.\nTotal: ZERO!"
-		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
+		texto = (
+			"Lista de quem perguntou:\n"
+			"1.\n"
+			"2.\n"
+			"3.\n"
+			"4.\n"
+			"5.\n"
+			"Total: ZERO!"
+		)
+		bot.sendMessage(
+			chat_id=update.message.chat_id,
+			reply_to_message_id=update.message.message_id,
+			text=texto
+		)
 	else:
 		mensagem = mensagem.replace(" ","")
-		texto = "Lista de quem perguntou a opinião de " + str(mensagem) + ":\n1.\n2.\n3.\n4.\n5.\nTotal: <b>ZERO</b>!"
-		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
+		texto = (
+			f"Lista de quem perguntou a opinião de {mensagem}:\n"
+			"1.\n"
+			"2.\n"
+			"3.\n"
+			"4.\n"
+			"5.\n"
+			"Total: <b>ZERO</b>!"
+		)
+		bot.sendMessage(
+			chat_id=update.message.chat_id,
+			reply_to_message_id=update.message.message_id,
+			text=texto,
+			parse_mode=telegram.ParseMode.HTML
+		)
 
 
 def add(bot, update):
 	mensagem = update.message.text
 	mensagem = mensagem.replace("/add","")
-	frases = ["Sinceramente, ninguem quer saber da sua opinião ", "Acho melhor você ficar calad@ e se recolher na sua insignificância ",
-			"Não adianta inisistir, você nunca será ouvid@ (nem lid@) "]
+	frases = [
+		"Sinceramente, ninguem quer saber da sua opinião ",
+		"Acho melhor você ficar calad@ e se recolher na sua insignificância ",
+		"Não adianta inisistir, você nunca será ouvid@ (nem lid@) "
+	]
 	if(not(mensagem)):
-		texto = "De quem você quis adicionar a opinião?!\n<b>Foda-se</b>. Não é importante de qualquer maneira."
-		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
+		texto = (
+			"De quem você quis adicionar a opinião?!\n"
+			"<b>Foda-se</b>. "
+			"Não é importante de qualquer maneira."
+		)
+		bot.sendMessage(
+			chat_id=update.message.chat_id,
+			reply_to_message_id=update.message.message_id,
+			text=texto,
+			parse_mode=telegram.ParseMode.HTML
+		)
 	else:
 		mensagem = mensagem.replace(" ","")
-		frase = frases[randint(0,len(frases)-1)]
-		texto = str(frase) + str(mensagem) + "."
-		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
+		frase = frases[randint(0, len(frases)-1)]
+		texto = f'{frase} {mensagem}.'
+		bot.sendMessage(
+			chat_id=update.message.chat_id,
+			reply_to_message_id=update.message.message_id,
+			text=texto
+		)
 
 
 def help(bot, update):
@@ -52,12 +100,25 @@ def help(bot, update):
 			/lista - Listar as pessoas que perguntaram alguma coisa.\n\
 			/info - Informação sobre o bot e o desenvolvedor.\n\
 			/help - Você está nele, coisa linda da mãe!"
-	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
+	bot.sendMessage(
+		chat_id=update.message.chat_id,
+		reply_to_message_id=update.message.message_id,
+		text=texto,
+		parse_mode=telegram.ParseMode.HTML
+	)
 
 
 def info(bot, update):
-	texto = "Bot desenvolvido por <b>Geraldo</b> (@exaGeraldo).\nMas ninguem liga pra isso também."
-	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
+	texto = (
+		"Bot desenvolvido por <b>Geraldo</b> (@exaGeraldo).\n"
+		"Mas ninguem liga pra isso também."
+	)
+	bot.sendMessage(
+		chat_id=update.message.chat_id,
+		reply_to_message_id=update.message.message_id,
+		text=texto,
+		parse_mode=telegram.ParseMode.HTML
+	)
 
 
 def error(bot, update, error):
