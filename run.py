@@ -1,13 +1,11 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import sys
 import logging
 import telegram
 from random import randint
 from telegram.ext.dispatcher import run_async
-from telegram.ext import Updater, StringCommandHandler, StringRegexHandler, \
-	MessageHandler, CommandHandler, RegexHandler, Filters
+from telegram.ext import (Updater, StringCommandHandler, StringRegexHandler,
+						  MessageHandler, CommandHandler, RegexHandler, Filters)
+
 
 logging.basicConfig(
 		format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -18,9 +16,11 @@ token = sys.argv[1]
 updater = Updater(token)
 dp = updater.dispatcher
 
+
 def start(bot, update):
 	texto = "Olá.\nEsse bot foi desenvolvido para fins que não importam a você."
 	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
+
 
 def lista(bot, update):
 	mensagem = update.message.text
@@ -32,6 +32,7 @@ def lista(bot, update):
 		mensagem = mensagem.replace(" ","")
 		texto = "Lista de quem perguntou a opinião de " + str(mensagem) + ":\n1.\n2.\n3.\n4.\n5.\nTotal: <b>ZERO</b>!"
 		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
+
 
 def add(bot, update):
 	mensagem = update.message.text
@@ -47,6 +48,7 @@ def add(bot, update):
 		texto = str(frase) + str(mensagem) + "."
 		bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto)
 
+
 def help(bot, update):
 	texto = "<b>Comandos</b>:\n\
 			/start - Iniciar o chat com o bot.\n\
@@ -56,15 +58,17 @@ def help(bot, update):
 			/help - Você está nele, coisa linda da mãe!"
 	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
 
+
 def info(bot, update):
 	texto = "Bot desenvolvido por <b>Geraldo</b> (@exaGeraldo).\nMas ninguem liga pra isso também."
 	bot.sendMessage(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=texto, parse_mode=telegram.ParseMode.HTML)
 
+
 def error(bot, update, error):
 	logger.warn('Update "%s" caused error "%s"' % (update, error))
 
-def main():
-	
+
+if __name__ == '__main__':
 	dp.add_handler(CommandHandler("start", start))
 	dp.add_handler(CommandHandler("lista", lista))
 	dp.add_handler(CommandHandler("add", add))
@@ -74,7 +78,3 @@ def main():
 	dp.add_error_handler(error)
 	updater.start_polling()
 	updater.idle()
-	
-
-if __name__ == '__main__':
-	main()
