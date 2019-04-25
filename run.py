@@ -3,15 +3,11 @@ import logging
 import telegram
 from random import randint
 from telegram.ext.dispatcher import run_async
+from loguru import logger
 from telegram.ext import (Updater, StringCommandHandler, StringRegexHandler,
 						  MessageHandler, CommandHandler, RegexHandler, Filters)
 
 
-logging.basicConfig(
-		format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-		level=logging.INFO)
-
-logger = logging.getLogger(__name__)
 token = sys.argv[1]
 updater = Updater(token)
 dp = updater.dispatcher
